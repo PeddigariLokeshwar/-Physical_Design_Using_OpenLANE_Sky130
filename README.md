@@ -396,16 +396,16 @@ A format that tells us about cell boundaries, VDD and GND lines. It contains no 
 Within the Magic environment, following commands are used in tkcon to achieve .mag to .spice extraction:
 ```
 extract all
-ext2spice cthresh 0 rethresh 0
+ext2spice cthresh 0 rthresh 0
 ext2spice
 ```
 ![spice extraction commands](https://github.com/PeddigariLokeshwar/-Physical_Design_Using_OpenLANE_Sky130/assets/105622389/fd08d29f-01b7-40b6-8d0e-b15db2649aed)
 
-This generates the ```sky130_in.spice``` file as shown above. This SPICE deck is edited to include ```pshort.lib``` and ```nshort.lib``` which are the PMOS and NMOS libraries respectively. In addition, the minimum grid size of inverter is measured from the magic layout and incorporated into the deck as: ```.option scale=0.01u```. The model names in the MOSFET definitions are changed to ```pshort.model.0``` and ```nshort.model.0``` respectively for PMOS and NMOS. Finally voltage sources and simulation commands are defined as follows:
+This generates the ```sky130_inv.spice``` file as shown above. This SPICE deck is edited to include ```pshort.lib``` and ```nshort.lib``` which are the PMOS and NMOS libraries respectively. In addition, the minimum grid size of inverter is measured from the magic layout and incorporated into the deck as: ```.option scale=0.01u```. The model names in the MOSFET definitions are changed to ```pshort.model.0``` and ```nshort.model.0``` respectively for PMOS and NMOS. Finally voltage sources and simulation commands are defined as follows:
 ```
 VDD VPWR 0 3.3V
 VSS VGND 0 0
-Va A VGND PUSLE(0V 3.3V 0 0.1ns 0.1 ns 2ns 4ns)
+Va A VGND PULSE(0V 3.3V 0 0.1ns 0.1ns 2ns 4ns)
 .tran 1n 20n
 .control
 run 
